@@ -2,20 +2,21 @@ import sys
 from pwn import *
 
 BINARY_NAME = ""
-IP = ""
-PORT = 6969
+CONN_ADDR = ""
 OFFSET = 16
 
 elf = context.binary = ELF(BINARY_NAME)
 
 if len(sys.argv) > 1:
-    p = remote(IP, PORT)
+    ip = CONN_ADDR.split(" ")[0]
+    port = int(CONN_ADDR.split(" ")[1])
+    p = remote(ip, port)
 else:
     p = process()
     context.terminal = ['tmux', 'splitw', '-h']
     # TODO: gdb.attach(p, gdbscript="break *function+line\ncontinue")
 
-payload = b'A' * OFFSET
+payload = b'\x69' * OFFSET
 
 p.clean()
 p.sendline(payload)
