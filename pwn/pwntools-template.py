@@ -10,10 +10,10 @@ elf = context.binary = ELF(BINARY_NAME)
 
 if len(sys.argv) > 1:
     p = remote(IP, PORT)
-    context.terminal = ['tmux', 'splitw', '-h']
-    gdb.attach(p, gdbscript="break *bof+25\ncontinue")
 else:
     p = process()
+    context.terminal = ['tmux', 'splitw', '-h']
+    # TODO: gdb.attach(p, gdbscript="break *function+line\ncontinue")
 
 payload = b'A' * OFFSET
 
