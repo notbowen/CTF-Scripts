@@ -14,7 +14,7 @@ if len(sys.argv) > 1:
 else:
     p = process()
     context.terminal = ['tmux', 'splitw', '-h']
-    # TODO: gdb.attach(p, gdbscript="break *function+line\ncontinue")
+    # TODO: gdb.attach(p, gdbscript="unset env LINES\nunset env COLUMNS\nbreak *function+line\ncontinue")
 
 payload = b'\x69' * OFFSET
 
